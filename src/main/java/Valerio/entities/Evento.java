@@ -1,11 +1,9 @@
 package Valerio.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -25,10 +23,14 @@ public class Evento {
     private String descrizione;
 
     @Column(name = "tipo-evento")
+    @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
 
     @Column(name = "numero-massimo-partecipanti")
     private int numeroMassimoPartecipanti;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Partecipazioni> listaPartecipazioni;
 
     public Evento(String titolo, Date dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
         this.titolo = titolo;
